@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Environment Variables
+.env
+
+# Google Credentials (NEVER COMMIT THIS!)
+backend/config/credentials.json
+backend/config/credentials.json.json
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Build files
+dist/
+build/
+
+# Temporary files
+*.tmp
+*.temp

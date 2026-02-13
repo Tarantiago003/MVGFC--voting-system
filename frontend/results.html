@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Results - MVG Foundation Colleges Voting</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Banner Section -->
+        <div class="banner">
+            <img src="assets/banner.png" alt="MVG Foundation Colleges Banner" class="banner-image">
+        </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <div class="header-section results-header">
+            <img src="assets/logo.png" alt="MVG Logo" class="logo">
+            <h1>Live Voting Results</h1>
+            <p class="subtitle">Real-time vote counts and standings</p>
+        </div>
+
+        <!-- Statistics Section -->
+        <div class="card">
+            <div class="results-stats">
+                <div class="stat-box">
+                    <div class="number" id="totalVotes">0</div>
+                    <div class="label">Total Votes</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number" id="totalCandidates">0</div>
+                    <div class="label">Candidates</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number" id="leadingCandidate">-</div>
+                    <div class="label">Leading</div>
+                </div>
+            </div>
+
+            <div class="refresh-section">
+                <button class="btn-secondary" onclick="refreshResults()">
+                    🔄 Refresh Results
+                </button>
+                <p style="margin-top: 10px; font-size: 14px; color: #666;">
+                    Last updated: <span id="lastUpdate">-</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Results List -->
+        <div id="resultsList">
+            <div class="loading-spinner">Loading results...</div>
+        </div>
+
+        <!-- Actions -->
+        <div class="card" style="text-align: center;">
+            <h3 style="color: var(--primary-green); margin-bottom: 16px;">
+                Haven't voted yet?
+            </h3>
+            <a href="index.html" style="text-decoration: none;">
+                <button class="btn-primary">Cast Your Vote</button>
+            </a>
+        </div>
+
+        <!-- Information -->
+        <div class="info-card">
+            <h3>📊 About These Results</h3>
+            <ul>
+                <li>Results are updated in real-time</li>
+                <li>Only verified votes are counted</li>
+                <li>Each student can vote only once</li>
+                <li>Percentages are calculated from total valid votes</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 Manuel V Gallego Foundation Colleges. All rights reserved.</p>
+    </footer>
+
+    <script src="js/results.js"></script>
+</body>
+</html>

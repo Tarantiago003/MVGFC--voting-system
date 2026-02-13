@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - MVG Voting System</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Login Screen (shown by default) -->
+    <div id="loginScreen" class="container" style="display: block;">
+        <div class="header-section">
+            <img src="assets/logo.png" alt="MVG Logo" class="logo">
+            <h1>Admin Panel</h1>
+            <p class="subtitle">Enter your credentials to access the admin dashboard</p>
+        </div>
+
+        <div class="card">
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="adminPassword">Admin Password</label>
+                    <input 
+                        type="password" 
+                        id="adminPassword" 
+                        placeholder="Enter admin password" 
+                        required
+                        autocomplete="current-password"
+                    >
+                </div>
+
+                <button type="submit" class="btn-primary">
+                    Login
+                </button>
+
+                <div class="form-footer">
+                    <a href="index.html">← Back to Voting</a>
+                </div>
+            </form>
+
+            <div id="loginError" class="error-message" style="display: none; margin-top: 16px;">
+                <p id="loginErrorText"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard (hidden by default) -->
+    <div id="adminDashboard" style="display: none;">
+        <div class="container">
+            <!-- Header -->
+            <div class="admin-header">
+                <h1>Admin Dashboard</h1>
+                <p>Manuel V Gallego Foundation Colleges - Voting System</p>
+                <button class="btn-secondary" onclick="logout()" style="margin-top: 12px;">
+                    Logout
+                </button>
+            </div>
+
+            <!-- Tabs -->
+            <div class="admin-tabs">
+                <button class="tab-btn active" onclick="switchTab('overview')">
+                    📊 Overview
+                </button>
+                <button class="tab-btn" onclick="switchTab('contestants')">
+                    👥 Contestants
+                </button>
+                <button class="tab-btn" onclick="switchTab('voters')">
+                    📋 Voters List
+                </button>
+            </div>
+
+            <!-- Overview Tab -->
+            <div id="overviewTab" class="tab-content active">
+                <div class="card">
+                    <h2 style="color: var(--primary-green); margin-bottom: 20px;">
+                        System Overview
+                    </h2>
+                    
+                    <div class="results-stats">
+                        <div class="stat-box">
+                            <div class="number" id="adminTotalVotes">0</div>
+                            <div class="label">Total Votes</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="number" id="adminTotalContestants">0</div>
+                            <div class="label">Contestants</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="number" id="adminActiveContestants">0</div>
+                            <div class="label">Active</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 24px;">
+                        <h3 style="margin-bottom: 12px;">Quick Actions</h3>
+                        <button class="btn-primary" onclick="switchTab('contestants')" style="margin-bottom: 12px;">
+                            Add New Contestant
+                        </button>
+                        <button class="btn-secondary" onclick="exportVoterData()">
+                            📥 Export Voter Data (CSV)
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contestants Tab -->
+            <div id="contestantsTab" class="tab-content">
+                <div class="card">
+                    <h2 style="color: var(--primary-green); margin-bottom: 20px;">
+                        Manage Contestants
+                    </h2>
+                    
+                    <button class="btn-primary" onclick="showAddContestantForm()" style="margin-bottom: 20px;">
+                        + Add New Contestant
+                    </button>
+
+                    <!-- Add/Edit Form (hidden by default) -->
+                    <div id="contestantForm" style="display: none; margin-bottom: 24px; padding: 20px; background: var(--light-gray); border-radius: 8px;">
+                        <h3 id="formTitle">Add New Contestant</h3>
+                        <form id="contestantFormFields">
+                            <input type="hidden" id="editContestantId">
+                            
+                            <div class="form-group">
+                                <label for="contestantName">Name *</label>
+                                <input type="text" id="contestantName" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contestantDescription">Description</label>
+                                <input type="text" id="contestantDescription" placeholder="e.g., Senior Representative">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contestantImageUrl">Image Filename</label>
+                                <input type="text" id="contestantImageUrl" placeholder="e.g., juan-dela-cruz.jpg">
+                                <small style="color: #666; display: block; margin-top: 4px;">
+                                    📁 Place image in: frontend/assets/candidates/<br>
+                                    Examples: juan-dela-cruz.jpg, maria-santos.png
+                                </small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contestantActive">Status</label>
+                                <select id="contestantActive">
+                                    <option value="true">Active</option>
+                                    <option value="false">Inactive</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn-primary">Save Contestant</button>
+                            <button type="button" class="btn-secondary" onclick="hideContestantForm()">Cancel</button>
+                        </form>
+                    </div>
+
+                    <!-- Contestants List -->
+                    <div id="contestantsList" class="admin-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Photo</th>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Image File</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="contestantsTableBody">
+                                <tr>
+                                    <td colspan="7" style="text-align: center;">Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Voters Tab -->
+            <div id="votersTab" class="tab-content">
+                <div class="card">
+                    <h2 style="color: var(--primary-green); margin-bottom: 20px;">
+                        Voters List (Lead Generation)
+                    </h2>
+                    
+                    <button class="btn-secondary" onclick="exportVoterData()" style="margin-bottom: 20px;">
+                        📥 Export to CSV
+                    </button>
+
+                    <div id="votersList" class="admin-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Timestamp</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Mobile</th>
+                                    <th>Voted For</th>
+                                </tr>
+                            </thead>
+                            <tbody id="votersTableBody">
+                                <tr>
+                                    <td colspan="5" style="text-align: center;">Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>

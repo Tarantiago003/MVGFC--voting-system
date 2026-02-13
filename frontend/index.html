@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Voting - Manuel V Gallego Foundation Colleges</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Banner Section -->
+    <div class="banner">
+        <img src="assets/banner.png" alt="MVG Foundation Colleges Banner" class="banner-image">
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Logo and Header -->
+        <div class="header-section">
+            <img src="assets/logo.png" alt="MVG Logo" class="logo">
+            <h1>Student Representative Voting</h1>
+            <p class="subtitle">Cast your vote for the next student representative</p>
+        </div>
+
+        <!-- Voting Form Card -->
+        <div class="card">
+            <!-- Success Message (Hidden by default) -->
+            <div id="successMessage" class="message success-message" style="display: none;">
+                <h3>✓ Vote Submitted Successfully!</h3>
+                <p>Thank you for participating. You will be redirected to the results page...</p>
+            </div>
+
+            <!-- Error Message (Hidden by default) -->
+            <div id="errorMessage" class="message error-message" style="display: none;">
+                <h3>⚠ Unable to Submit Vote</h3>
+                <p id="errorText"></p>
+            </div>
+
+            <!-- Voting Form -->
+            <form id="votingForm">
+                <div class="form-group">
+                    <label for="fullName">Full Name *</label>
+                    <input 
+                        type="text" 
+                        id="fullName" 
+                        name="fullName" 
+                        placeholder="Enter your full name" 
+                        required
+                        autocomplete="name"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder="your.email@example.com" 
+                        required
+                        autocomplete="email"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="mobile">Mobile Number *</label>
+                    <input 
+                        type="tel" 
+                        id="mobile" 
+                        name="mobile" 
+                        placeholder="09XX XXX XXXX" 
+                        pattern="[0-9]{11}" 
+                        required
+                        autocomplete="tel"
+                    >
+                    <small>Format: 11 digits (e.g., 09123456789)</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="currentSchool">Current School *</label>
+                    <input 
+                        type="text" 
+                        id="currentSchool" 
+                        name="currentSchool" 
+                        placeholder="Enter your school name" 
+                        required
+                        autocomplete="organization"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="gradeLevel">Grade Level *</label>
+                    <select 
+                        id="gradeLevel" 
+                        name="gradeLevel" 
+                        required
+                    >
+                        <option value="">-- Select your grade level --</option>
+                        <option value="Grade 7">Grade 7</option>
+                        <option value="Grade 8">Grade 8</option>
+                        <option value="Grade 9">Grade 9</option>
+                        <option value="Grade 10">Grade 10</option>
+                        <option value="Grade 11">Grade 11</option>
+                        <option value="Grade 12">Grade 12</option>
+                        <option value="1st Year College">1st Year College</option>
+                        <option value="2nd Year College">2nd Year College</option>
+                        <option value="3rd Year College">3rd Year College</option>
+                        <option value="4th Year College">4th Year College</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Select Your Candidate *</label>
+                    <div id="contestantsList" class="contestants-list">
+                        <!-- Contestants will be loaded here dynamically -->
+                        <div class="loading-spinner">Loading candidates...</div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary" id="submitBtn">
+                    Submit Vote
+                </button>
+
+                <div class="form-footer">
+                    <p>Already voted? <a href="results.html">View Results</a></p>
+                </div>
+            </form>
+        </div>
+
+        <!-- Information Section -->
+        <div class="info-section">
+            <div class="info-card">
+                <h3>📋 Voting Guidelines</h3>
+                <ul>
+                    <li>Each student can vote only once</li>
+                    <li>Select only ONE candidate</li>
+                    <li>All information provided will be kept confidential</li>
+                    <li>Voting closes on the announced deadline</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3>🎓 About MVG Foundation Colleges</h3>
+                <p>Manuel V Gallego Foundation Colleges is committed to providing quality education and fostering student leadership through democratic processes.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 Manuel V Gallego Foundation Colleges. All rights reserved.</p>
+        <p class="admin-link"><a href="admin.html">Admin Access</a></p>
+    </footer>
+
+    <script src="js/voting.js"></script>
+</body>
+</html>
