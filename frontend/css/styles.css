@@ -14,7 +14,6 @@
     --success-green: #388E3C;
 }
 
-/* Reset and Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -32,7 +31,6 @@ body {
     position: relative;
 }
 
-/* Background Image with Overlay - Behind Everything */
 body::before {
     content: '';
     position: fixed;
@@ -46,7 +44,7 @@ body::before {
     pointer-events: none;
 }
 
-/* Banner Section - Floating Style */
+/* Banner */
 .banner {
     width: 100%;
     background: transparent;
@@ -112,7 +110,7 @@ body::before {
     font-size: 16px;
 }
 
-/* Card Component */
+/* Card */
 .card {
     background: rgba(255, 255, 255, 0.98);
     border-radius: 16px;
@@ -164,81 +162,216 @@ body::before {
     color: #666;
 }
 
+/* Form Section Labels */
+.form-section-label {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--primary-green);
+    border-bottom: 2px solid rgba(45, 95, 46, 0.2);
+    padding-bottom: 6px;
+    margin-bottom: 20px;
+    margin-top: 8px;
+}
+
 /* Contestants List */
 .contestants-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+}
+
+.loading-spinner {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+    font-style: italic;
+}
+
+/* Contestant Card */
+.contestant-card {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    align-items: center;
+    padding: 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-.contestant-option {
-    border: 2px solid var(--border-gray);
+.contestant-card:hover {
+    border-color: var(--primary-green);
+    box-shadow: 0 4px 16px rgba(76, 175, 80, 0.2);
+    transform: translateY(-2px);
+}
+
+.contestant-card.selected {
+    border-color: var(--primary-green);
+    background: linear-gradient(135deg, #e8f5e9 0%, #ffffff 100%);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.3);
+}
+
+.contestant-image-container {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 16px;
+    border: 4px solid #e0e0e0;
+    transition: border-color 0.3s ease;
+    background: #f5f5f5;
+}
+
+.contestant-card:hover .contestant-image-container,
+.contestant-card.selected .contestant-image-container {
+    border-color: var(--primary-green);
+}
+
+.contestant-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.contestant-info {
+    text-align: center;
+    flex: 1;
+}
+
+.contestant-name {
+    margin: 0 0 8px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #212121;
+}
+
+.contestant-description {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+    line-height: 1.4;
+}
+
+.radio-indicator {
+    width: 24px;
+    height: 24px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    margin-top: 12px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.contestant-card.selected .radio-indicator {
+    border-color: var(--primary-green);
+    background: var(--primary-green);
+}
+
+.contestant-card.selected .radio-indicator::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Privacy Consent */
+.consent-group {
+    background: rgba(45, 95, 46, 0.04);
+    border: 1px solid rgba(45, 95, 46, 0.25);
     border-radius: 8px;
     padding: 16px;
-    cursor: pointer;
-    transition: all 0.3s;
+}
+
+.consent-label {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 12px;
+    cursor: pointer;
+    font-weight: normal;
 }
 
-.contestant-option:hover {
-    border-color: var(--light-green);
-    background-color: #f9fff9;
-}
-
-.contestant-option.selected {
-    border-color: var(--primary-green);
-    background-color: #e8f5e9;
-}
-
-.contestant-option input[type="radio"] {
-    flex-shrink: 0;
+.consent-label input[type="checkbox"] {
     width: 20px;
     height: 20px;
+    flex-shrink: 0;
+    margin-top: 3px;
     cursor: pointer;
     accent-color: var(--primary-green);
 }
 
-/* Candidate Photo Styles */
-.contestant-photo {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    object-fit: cover;
-    flex-shrink: 0;
-    border: 3px solid var(--light-green);
-    box-shadow: 0 2px 8px rgba(45, 95, 46, 0.2);
+.consent-text {
+    font-size: 13px;
+    color: #444;
+    line-height: 1.65;
 }
 
-.contestant-photo-placeholder {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--primary-green), var(--light-green));
-    color: white;
+.consent-error {
+    color: var(--error-red);
+    font-size: 13px;
+    margin-top: 10px;
+    padding-left: 32px;
+}
+
+/* ID Verification Card */
+.id-verification-card {
+    border: 2px solid rgba(45, 95, 46, 0.3);
+    background: linear-gradient(135deg, rgba(45, 95, 46, 0.04) 0%, rgba(124, 179, 66, 0.04) 100%);
+}
+
+.id-verification-content {
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    font-weight: 700;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.id-icon {
+    font-size: 42px;
     flex-shrink: 0;
-    box-shadow: 0 2px 8px rgba(45, 95, 46, 0.2);
 }
 
-.contestant-info {
-    flex: 1;
+.id-text { flex: 1; min-width: 180px; }
+
+.id-text h3 {
+    color: var(--primary-green);
+    font-size: 18px;
+    margin-bottom: 6px;
 }
 
-.contestant-info h3 {
-    font-size: 17px;
-    color: var(--dark-text);
-    margin-bottom: 4px;
-}
-
-.contestant-info p {
+.id-text p {
     font-size: 14px;
-    color: #666;
+    color: #555;
+    line-height: 1.5;
+}
+
+.btn-id-submit {
+    padding: 14px 24px;
+    background: linear-gradient(135deg, var(--primary-green), var(--light-green));
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(45, 95, 46, 0.3);
+}
+
+.btn-id-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(45, 95, 46, 0.4);
 }
 
 /* Buttons */
@@ -370,7 +503,7 @@ body::before {
     font-weight: bold;
 }
 
-/* Results Page Styles */
+/* Results Page */
 .results-header {
     text-align: center;
     margin-bottom: 30px;
@@ -411,7 +544,6 @@ body::before {
     font-size: 36px;
     font-weight: 700;
     color: var(--primary-green);
-    text-shadow: 1px 1px 2px rgba(45, 95, 46, 0.1);
 }
 
 .stat-box .label {
@@ -447,6 +579,13 @@ body::before {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 12px;
+    gap: 16px;
+}
+
+.contestant-result-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
 }
 
 .contestant-result h3 {
@@ -483,6 +622,34 @@ body::before {
     color: var(--white);
     font-weight: 600;
     font-size: 14px;
+}
+
+/* Result Image */
+.result-image-container {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #e0e0e0;
+    flex-shrink: 0;
+    background: #f5f5f5;
+}
+
+.contestant-result.leading .result-image-container {
+    border-color: var(--primary-green);
+}
+
+.result-candidate-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 
 .refresh-section {
@@ -563,13 +730,6 @@ body::before {
     border-bottom: none;
 }
 
-/* Loading Spinner */
-.loading-spinner {
-    text-align: center;
-    padding: 20px;
-    color: #666;
-}
-
 /* Footer */
 .footer {
     background: linear-gradient(135deg, var(--primary-green) 0%, var(--light-green) 100%);
@@ -594,7 +754,77 @@ body::before {
     margin-top: 10px;
 }
 
-/* Responsive Design */
+/* ===== ID Verification Modal ===== */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    backdrop-filter: blur(3px);
+}
+
+.modal-container {
+    background: #fff;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 700px;
+    max-height: 92vh;
+    overflow-y: auto;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-header {
+    background: linear-gradient(135deg, var(--primary-green), var(--light-green));
+    color: #fff;
+    padding: 22px 24px 18px;
+    border-radius: 16px 16px 0 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.modal-header h3 { font-size: 19px; margin-bottom: 4px; }
+.modal-header p  { font-size: 13px; opacity: 0.9; }
+
+.modal-close-btn {
+    background: rgba(255, 255, 255, 0.22);
+    border: none;
+    color: #fff;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.modal-close-btn:hover { background: rgba(255, 255, 255, 0.38); }
+
+.modal-body { flex: 1; }
+.modal-body iframe { display: block; }
+
+.modal-footer {
+    padding: 14px 24px;
+    border-top: 1px solid var(--border-gray);
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* ===== Responsive ===== */
 @media (max-width: 768px) {
     .container {
         padding: 50px 16px 16px 16px;
@@ -643,164 +873,51 @@ body::before {
     .admin-table {
         overflow-x: auto;
     }
-}
 
-/* Accessibility */
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation: none !important;
-        transition: none !important;
-    }
-}
-
-/**
- * Contestants List Container
- * Add this to your styles.css
- */
-
-.contestants-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 16px;
-    margin: 20px 0;
-}
-
-/* Loading Spinner */
-.loading-spinner {
-    text-align: center;
-    padding: 40px;
-    color: #666;
-    font-style: italic;
-}
-
-/* Contestant Card Styles */
-.contestant-card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    border: 2px solid #e0e0e0;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    background: white;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
-
-.contestant-card:hover {
-    border-color: var(--primary-green);
-    box-shadow: 0 4px 16px rgba(76, 175, 80, 0.2);
-    transform: translateY(-2px);
-}
-
-.contestant-card.selected {
-    border-color: var(--primary-green);
-    background: linear-gradient(135deg, #e8f5e9 0%, #ffffff 100%);
-    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.3);
-}
-
-/* Image Container */
-.contestant-image-container {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-bottom: 16px;
-    border: 4px solid #e0e0e0;
-    transition: border-color 0.3s ease;
-    background: #f5f5f5;
-}
-
-.contestant-card:hover .contestant-image-container,
-.contestant-card.selected .contestant-image-container {
-    border-color: var(--primary-green);
-}
-
-.contestant-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-}
-
-/* Contestant Info */
-.contestant-info {
-    text-align: center;
-    flex: 1;
-}
-
-.contestant-name {
-    margin: 0 0 8px 0;
-    font-size: 18px;
-    font-weight: 600;
-    color: #212121;
-}
-
-.contestant-description {
-    margin: 0;
-    font-size: 14px;
-    color: #666;
-    line-height: 1.4;
-}
-
-/* Radio Indicator */
-.radio-indicator {
-    width: 24px;
-    height: 24px;
-    border: 2px solid #ccc;
-    border-radius: 50%;
-    margin-top: 12px;
-    position: relative;
-    transition: all 0.3s ease;
-}
-
-.contestant-card.selected .radio-indicator {
-    border-color: var(--primary-green);
-    background: var(--primary-green);
-}
-
-.contestant-card.selected .radio-indicator::after {
-    content: '✓';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-}
-
-/* Mobile Responsive */
-@media (max-width: 768px) {
     .contestants-list {
         grid-template-columns: 1fr;
         gap: 12px;
     }
-    
+
     .contestant-card {
         padding: 16px;
+        min-height: 180px;
+        -webkit-tap-highlight-color: rgba(76, 175, 80, 0.2);
     }
-    
+
     .contestant-image-container {
         width: 100px;
         height: 100px;
         border-width: 3px;
     }
-    
-    .contestant-name {
-        font-size: 16px;
+
+    .contestant-name { font-size: 16px; }
+    .contestant-description { font-size: 13px; }
+
+    .contestant-result-header {
+        flex-direction: column;
+        align-items: flex-start;
     }
-    
-    .contestant-description {
-        font-size: 13px;
+
+    .contestant-result-info {
+        width: 100%;
     }
-    
-    /* Touch-friendly sizing */
-    .contestant-card {
-        min-height: 180px;
-        -webkit-tap-highlight-color: rgba(76, 175, 80, 0.2);
+
+    .result-image-container {
+        width: 60px;
+        height: 60px;
+        border-width: 2px;
     }
+
+    .id-verification-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .btn-id-submit { width: 100%; }
+
+    .modal-header h3 { font-size: 17px; }
+    .modal-container { max-height: 95vh; }
 }
 
 @media (max-width: 480px) {
@@ -809,343 +926,19 @@ body::before {
         height: 80px;
         border-width: 2px;
     }
-    
-    .contestant-name {
-        font-size: 15px;
-    }
-    
-    .contestant-description {
-        font-size: 12px;
-    }
-}
 
-/* Error Message Inside Contestants List */
-.contestants-list .error-message {
-    grid-column: 1 / -1;
-    text-align: center;
-    padding: 40px 20px;
-    color: #666;
-}
+    .contestant-name { font-size: 15px; }
+    .contestant-description { font-size: 12px; }
 
-.contestants-list .error-message p {
-    margin: 0;
-    font-size: 16px;
-}
-/**
- * Results Page Styles with Candidate Images
- * Add these styles to your styles.css
- */
-
-/* Result Card */
-.result-card {
-    margin-bottom: 20px;
-    position: relative;
-    overflow: visible;
-}
-
-.result-card.leading {
-    border: 3px solid var(--primary-green);
-    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.3);
-}
-
-/* Result Header */
-.result-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 16px;
-}
-
-.result-candidate-info {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    flex: 1;
-}
-
-/* Candidate Image in Results */
-.result-image-container {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 3px solid #e0e0e0;
-    flex-shrink: 0;
-    background: #f5f5f5;
-}
-
-.result-card.leading .result-image-container {
-    border-color: var(--primary-green);
-}
-
-.result-candidate-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-}
-
-/* Candidate Details */
-.result-candidate-details {
-    flex: 1;
-}
-
-.result-candidate-name {
-    margin: 0 0 4px 0;
-    font-size: 20px;
-    font-weight: 600;
-    color: #212121;
-}
-
-.result-candidate-description {
-    margin: 0;
-    font-size: 14px;
-    color: #666;
-}
-
-/* Vote Count */
-.result-votes {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 8px 16px;
-    background: #f5f5f5;
-    border-radius: 8px;
-}
-
-.vote-count {
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--primary-green);
-    line-height: 1;
-}
-
-.vote-label {
-    font-size: 12px;
-    color: #666;
-    text-transform: uppercase;
-    margin-top: 4px;
-}
-
-/* Progress Bar Container */
-.progress-bar-container {
-    width: 100%;
-    height: 40px;
-    background: #e0e0e0;
-    border-radius: 8px;
-    overflow: hidden;
-    position: relative;
-}
-
-.progress-bar {
-    height: 100%;
-    background: linear-gradient(90deg, var(--primary-green) 0%, #66bb6a 100%);
-    transition: width 0.8s ease;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding-right: 12px;
-    min-width: 50px;
-}
-
-.progress-text {
-    color: white;
-    font-weight: 600;
-    font-size: 16px;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-/* Leading Badge */
-.leading-badge {
-    position: absolute;
-    top: -12px;
-    right: 20px;
-    background: var(--primary-green);
-    color: white;
-    padding: 6px 16px;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 700;
-    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.4);
-    z-index: 10;
-}
-
-/* Mobile Responsive */
-@media (max-width: 768px) {
-    .result-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    .result-candidate-info {
-        width: 100%;
-    }
-    
-    .result-image-container {
-        width: 60px;
-        height: 60px;
-        border-width: 2px;
-    }
-    
-    .result-candidate-name {
-        font-size: 18px;
-    }
-    
-    .result-candidate-description {
-        font-size: 13px;
-    }
-    
-    .result-votes {
-        width: 100%;
-        flex-direction: row;
-        justify-content: center;
-        gap: 8px;
-    }
-    
-    .vote-count {
-        font-size: 24px;
-    }
-    
-    .vote-label {
-        font-size: 14px;
-        margin-top: 0;
-    }
-    
-    .progress-bar-container {
-        height: 35px;
-    }
-    
-    .progress-text {
-        font-size: 14px;
-    }
-    
-    .leading-badge {
-        position: static;
-        display: inline-block;
-        margin-bottom: 12px;
-        font-size: 12px;
-        padding: 5px 12px;
-    }
-}
-
-@media (max-width: 480px) {
     .result-image-container {
         width: 50px;
         height: 50px;
     }
-    
-    .result-candidate-name {
-        font-size: 16px;
-    }
-    
-    .result-candidate-description {
-        font-size: 12px;
-    }
-    
-    .vote-count {
-        font-size: 20px;
-    }
-    
-    .progress-bar-container {
-        height: 30px;
-    }
-    
-    .progress-text {
-        font-size: 13px;
-    }
 }
 
-/* Loading State */
-.result-candidate-image {
-    animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-/**
- * Results Page - Candidate Images
- * Add these styles to your existing styles.css
- */
-
-/* Contestant Result Info - wraps image and text */
-.contestant-result-info {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-}
-
-/* Candidate Image Container */
-.result-image-container {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 3px solid #e0e0e0;
-    flex-shrink: 0;
-    background: #f5f5f5;
-}
-
-.contestant-result.leading .result-image-container {
-    border-color: var(--primary-green);
-}
-
-.result-candidate-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-}
-
-/* Update existing contestant-result-header to wrap properly */
-.contestant-result-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 16px;
-}
-
-/* Mobile Responsive */
-@media (max-width: 768px) {
-    .contestant-result-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    .contestant-result-info {
-        width: 100%;
-    }
-    
-    .result-image-container {
-        width: 60px;
-        height: 60px;
-        border-width: 2px;
-    }
-    
-    .vote-count {
-        width: 100%;
-        text-align: center;
-        padding: 8px;
-        background: #f5f5f5;
-        border-radius: 8px;
-    }
-}
-
-@media (max-width: 480px) {
-    .result-image-container {
-        width: 50px;
-        height: 50px;
-    }
-    
-    .contestant-result-info {
-        gap: 12px;
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
     }
 }
