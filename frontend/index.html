@@ -23,6 +23,19 @@
             <p class="subtitle">Cast your vote for the next Gurong Gallegan!</p>
         </div>
 
+        <!-- ✅ MOVED UP: Voting Guidelines (now above the form) -->
+        <div class="info-card" style="margin-bottom: 20px;">
+            <h3>&#128203; Voting Guidelines</h3>
+            <ul>
+                <li>Each student can vote only once</li>
+                <li>Select only ONE candidate</li>
+                <li>You must agree to the privacy consent</li>
+                <li>Submit a valid ID to verify your vote</li>
+                <li>All information provided will be kept confidential</li>
+                <li>Voting closes on the announced deadline</li>
+            </ul>
+        </div>
+
         <!-- Voting Form Card -->
         <div class="card">
 
@@ -84,9 +97,16 @@
                     <label for="gradeLevel">Grade Level *</label>
                     <select id="gradeLevel" name="gradeLevel" required>
                         <option value="">-- Select your grade level --</option>
-                        <option value="Grade 6">Grade 6</option>>
+                        <option value="Grade 7">Grade 7</option>
+                        <option value="Grade 8">Grade 8</option>
+                        <option value="Grade 9">Grade 9</option>
                         <option value="Grade 10">Grade 10</option>
+                        <option value="Grade 11">Grade 11</option>
                         <option value="Grade 12">Grade 12</option>
+                        <option value="1st Year College">1st Year College</option>
+                        <option value="2nd Year College">2nd Year College</option>
+                        <option value="3rd Year College">3rd Year College</option>
+                        <option value="4th Year College">4th Year College</option>
                     </select>
                 </div>
 
@@ -116,7 +136,26 @@
                     </div>
                 </div>
 
+                <!-- ✅ MOVED HERE: ID Verification (now above privacy consent) -->
+                <div class="id-verification-inline">
+                    <div class="id-verification-content">
+                        <div class="id-icon">&#128203;</div>
+                        <div class="id-text">
+                            <h3>ID Verification Required</h3>
+                            <p>
+                                To make your vote valid, submit a photo of your valid
+                                <strong>school ID</strong> or <strong>government-issued ID</strong>.
+                            </p>
+                        </div>
+                        <button type="button" class="btn-id-submit" onclick="openIDModal()">
+                            Submit ID
+                        </button>
+                    </div>
+                </div>
+
                 <!-- ── Privacy Consent ── -->
+                <div class="form-section-label">Privacy Consent</div>
+
                 <div class="form-group consent-group">
                     <label class="consent-label">
                         <input type="checkbox" id="privacyConsent" name="privacyConsent">
@@ -146,36 +185,8 @@
             </form>
         </div>
 
-        <!-- ID Verification Card (always visible) -->
-        <div class="card id-verification-card">
-            <div class="id-verification-content">
-                <div class="id-icon">&#128203;</div>
-                <div class="id-text">
-                    <h3>ID Verification Required</h3>
-                    <p>
-                        To make your vote valid, please submit a photo of your valid
-                        <strong>school ID</strong>.
-                    </p>
-                </div>
-                <button class="btn-id-submit" onclick="openIDModal()">
-                    Submit ID
-                </button>
-            </div>
-        </div>
-
-        <!-- Info Section -->
+        <!-- Info Section (About only) -->
         <div class="info-section">
-            <div class="info-card">
-                <h3>&#128203; Voting Guidelines</h3>
-                <ul>
-                    <li>Each student can vote only once</li>
-                    <li>Select only ONE candidate</li>
-                    <li>You must agree to the privacy consent</li>
-                    <li>Submit a valid ID to verify your vote</li>
-                    <li>All information provided will be kept confidential</li>
-                    <li>Voting closes on the announced deadline</li>
-                </ul>
-            </div>
             <div class="info-card">
                 <h3>&#127891; About MVG Foundation Colleges</h3>
                 <p>Manuel V Gallego Foundation Colleges is committed to providing quality education
